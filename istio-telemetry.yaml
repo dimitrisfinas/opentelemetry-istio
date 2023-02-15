@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio
+  namespace: istio-system
+  annotations:
+    meta.helm.sh/release-name: istiod
+    meta.helm.sh/release-namespace: istio-system
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    install.operator.istio.io/owning-resource: unknown
+    istio.io/rev: default
+    operator.istio.io/component: Pilot
+    release: istiod
+data:
+  meshNetworks: |-
+    networks: {}
+
+  mesh: |-
+    defaultConfig:
+      discoveryAddress: istiod.istio-system.svc:15012
+    defaultProviders:
+      tracing:
+        - opentelemetry
+    extensionProviders:
+      - name: "opentelemetry"
+        opentelemetry:
+          service: "opentelemetry-collector.istio-system.svc.cluster.local"
+          port: 4317
+    enablePrometheusMerge: true
+    rootNamespace: null
+    trustDomain: cluster.local
+
+---
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: mesh-default
+  namespace: istio-system
+spec:
+  accessLogging:
+    - providers:
+      - name: opentelemetry
+  tracing:
+  - providers:
+    - name: opentelemetry
+    customTags:
+      test:
+        literal:
+          value: "this is a test of custom attribute"
+    randomSamplingPercentage: 100
