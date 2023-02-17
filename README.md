@@ -335,6 +335,8 @@ kubectl delete -f samples/bookinfo/platform/kube/bookinfo.yaml
 ```
 
 ## SOURCE
+- Istio Kubernetes versions compatibility matrix https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
+
 - Istio helm installation: https://istio.io/latest/docs/setup/install/helm/
 
 - Istio Telemetry API: https://istio.io/latest/docs/tasks/observability/telemetry/
