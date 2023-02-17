@@ -1,7 +1,7 @@
 # HOW TO INSTALL ISTIO WITH OPENTELEMETRY/LIGHTSTEP
 
 ## VERSION TESTED
-- Istio v1.16.2
+- Istio v1.16.2, v1.17
 - Kubernetes v1.23.14
 - Helm 3.6 or above
 
